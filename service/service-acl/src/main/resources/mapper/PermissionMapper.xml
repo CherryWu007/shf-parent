@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mapper.PermissionMapper">
+
+    <select id="findAll" resultType="com.atguigu.entity.Permission">
+        select * from acl_permission where is_deleted=0 and TYPE=1
+    </select>
+
+
+
+    <!--
+    方法一：五表联查：acl_admin  acl_admin_role  acl_role  acl_role_permission  acl_permission
+    方法二：三表联查：acl_admin_role  acl_role_permission  acl_permission
+    -->
+    <select id="findListByAdminId" resultType="com.atguigu.entity.Permission">
+        select distinct p.*
+        from acl_admin_role ar
+                 join acl_role_permission rp
+                      on ar.role_id=rp.role_id
+                 join acl_permission p
+                      on rp.permission_id=p.id
+
+        where ar.admin_id=#{adminId}
+          and ar.is_deleted=0
+          and rp.is_deleted=0
+          and p.is_deleted=0
+          and p.type=1
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mapper.UserInfoMapper">
+    <select id="getByPhone" resultType="com.atguigu.entity.UserInfo">
+        select * from user_info where is_deleted =0 and phone =#{phone}
+    </select>
+
+    <insert id="insert">
+        insert into user_info
+            (phone, password, nick_name, status) VALUES
+            (#{phone},#{password},#{nickName},#{status})
+    </insert>
+</mapper>
