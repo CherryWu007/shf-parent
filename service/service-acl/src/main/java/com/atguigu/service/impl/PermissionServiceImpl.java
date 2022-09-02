@@ -100,7 +100,11 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
     }
 
     @Override
-    public List<String> findCodeListByAdminId(Long id) {
-        return null;
+    public List<String> findCodeListByAdminId(Long adminId) {
+
+        if (adminId==1){
+            return permissionMapper.findAllCode();
+        }
+        return permissionMapper.findCodeListByAdminId(adminId);
     }
 }

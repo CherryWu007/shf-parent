@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author 85118
+ */
 public class CustomAccessDeineHandler implements AccessDeniedHandler {
 
     @Override

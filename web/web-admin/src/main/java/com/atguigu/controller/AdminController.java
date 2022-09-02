@@ -8,6 +8,7 @@ import com.atguigu.service.RoleService;
 import com.atguigu.util.QiniuUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -41,6 +42,8 @@ public class AdminController extends BaseController {
     private AdminService adminService;
     @Reference
     private RoleService roleService;
+    @Reference
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping
     public String findPage(HttpServletRequest request, Model model){
@@ -62,6 +65,8 @@ public class AdminController extends BaseController {
     @RequestMapping("/save")
     public String save(Admin admin){
         admin.setHeadUrl("http://47.93.148.192:8080/group1/M00/03/F0/rBHu8mHqbpSAU0jVAAAgiJmKg0o148.jpg");
+        //调整添加用户的代码，增加密码加密功能
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         this.adminService.insert(admin);
         return "common/successPage";
     }

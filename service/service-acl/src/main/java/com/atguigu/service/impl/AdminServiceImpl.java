@@ -41,6 +41,6 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminSer
 
     @Override
     public Admin getByUsername(String username) {
-        return null;
+        return adminMapper.getByUsername(username);
     }
 }

@@ -11,7 +11,7 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <!-- 扫描指定包，加入@Service注解的类会被发布为服务  -->
-    <dubbo:annotation package="com.atguigu.controller" />
+    <dubbo:annotation package="com.atguigu.controller,com.atguigu.config" />
 
     <!--取消检查-->
     <dubbo:consumer check="false"/>

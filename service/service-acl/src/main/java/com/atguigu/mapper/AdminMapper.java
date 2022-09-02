@@ -20,4 +20,6 @@ import java.util.List;
 
 public interface AdminMapper extends BaseMapper<Admin> {
     List<Admin> findAll();
+
+    Admin getByUsername(String username);
 }

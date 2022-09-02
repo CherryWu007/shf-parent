@@ -22,4 +22,8 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     List<Permission> findAll();
 
     List<Permission> findListByAdminId(Long adminId);
+
+    List<String> findAllCode();
+
+    List<String> findCodeListByAdminId(Long adminId);
 }

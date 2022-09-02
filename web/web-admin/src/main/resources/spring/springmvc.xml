@@ -5,6 +5,7 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <import resource="classpath:spring/spring-registry.xml"/>
+    <import resource="classpath:spring/spring-redis.xml"/>
     <!--组件扫描-->
     <context:component-scan base-package="com.atguigu.controller,com.atguigu.config"/>
 
@@ -53,6 +54,12 @@
                         LEGACYHTML5：表示宽松模式-->
                         <property name="templateMode" value="LEGACYHTML5"/>
                     </bean>
+                </property>
+                <!-- 添加spring security 标签支持：sec -->
+                <property name="additionalDialects">
+                    <set>
+                        <bean class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect"/>
+                    </set>
                 </property>
             </bean>
         </property>

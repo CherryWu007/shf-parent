@@ -7,6 +7,7 @@ import com.atguigu.service.PermissionService;
 import com.atguigu.service.RoleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ import java.util.*;
 public class RoleController extends BaseController {
     @Reference
     private RoleService roleService;
-
+    @PreAuthorize("hasAuthority('role.show')")
 
     @RequestMapping
     public String toIndex(Model model,HttpServletRequest request){
@@ -52,16 +53,19 @@ public class RoleController extends BaseController {
         model.addAttribute("all",all);
         return "role/index";
     }*/
+    @PreAuthorize("hasAuthority('role.create')")
     @RequestMapping("/create")
     public String create(){
         return "role/create";
     }
+    @PreAuthorize("hasAuthority('role.create')")
     @RequestMapping("/save")
     public String save(Role role){
         this.roleService.insert(role);
         return "common/successPage";
     }
 
+    @PreAuthorize("hasAuthority('role.edit')")
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Long id,Model model){
         Role role=this.roleService.getById(id);
@@ -69,12 +73,14 @@ public class RoleController extends BaseController {
         return "role/edit";
     }
 
+    @PreAuthorize("hasAuthority('role.create')")
     @RequestMapping("/update")
     public String update(Role role){
         this.roleService.update(role);
         return "common/successPage";
     }
 
+    @PreAuthorize("hasAuthority('role.delete')")
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
         this.roleService.delete(id);
@@ -85,6 +91,7 @@ public class RoleController extends BaseController {
     @Reference
     private PermissionService permissionService;
 
+    @PreAuthorize("hasAuthority('role.assgin')")
     @RequestMapping("/assignShow/{roleId}")
     public String assignShow(@PathVariable Long roleId,Model model){
         List<Map<String, Object>> zNodes = permissionService.findPermissionsByRoleId(roleId);

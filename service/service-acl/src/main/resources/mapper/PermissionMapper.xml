@@ -28,5 +28,26 @@
           and p.is_deleted=0
           and p.type=1
     </select>
+    <select id="findAllCode" resultType="java.lang.String">
+        select code from acl_permission where is_deleted=0 and type=2
+    </select>
+
+
+    <select id="findCodeListByAdminId" resultType="java.lang.String">
+        select distinct p.code
+        from acl_admin_role ar
+                 join acl_role_permission rp
+                      on ar.role_id=rp.role_id
+                 join acl_permission p
+                      on rp.permission_id=p.id
+
+        where ar.admin_id=#{adminId}
+          and ar.is_deleted=0
+          and rp.is_deleted=0
+          and p.is_deleted=0
+          and p.type=2
+
+
+    </select>
 
 </mapper>
